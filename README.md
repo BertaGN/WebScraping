@@ -11,7 +11,7 @@ To get started with web scraping using Puppeteer, follow these steps:
 1. Clone this repository: `git clone https://github.com/BertaGN/WebScraping.git`
 2. Install the dependencies: `npm install`
 3. Run the scraping scripts: 
-   - For customer support emails: `node scraping.js`
+   - For customer support emails: `node scrapeContact.js`
    - For product information: `node scrapeProducts.js`
 
 Make sure you have Node.js and npm installed on your machine.
@@ -27,9 +27,9 @@ This repository includes the following files:
 
 ### Scrape Customer Support Emails
 
-The `scraping.js` script extracts customer support names and emails from the webpage [https://reviewpro.shijigroup.com/team#contact](https://reviewpro.shijigroup.com/team#contact).
+The `scrapeContact.js` script extracts customer support names and emails from the webpage [https://reviewpro.shijigroup.com/team#contact](https://reviewpro.shijigroup.com/team#contact).
 
-To run the script, execute the following command: `node scraping.js`
+To run the script, execute the following command: `scrapeContact.js`
 
 The script will extract the customer support details and display them in the console.
 
