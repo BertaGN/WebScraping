@@ -3,10 +3,10 @@ const fs = require('fs');
 
 const URL = 'https://reviewpro.shijigroup.com/';
 
-async function scrapeData() { //function that handles the data
+async function scrapeData() { 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.setDefaultNavigationTimeout(0); // Disable the default timeout
+  await page.setDefaultNavigationTimeout(0);
 
   try {
     await page.goto(URL, { waitUntil: 'domcontentloaded' });
@@ -14,7 +14,7 @@ async function scrapeData() { //function that handles the data
     console.error('Error loading page:', error);
     await browser.close();
     return {};
-  } // if URL can not be loaded an error is displayed in the console, browser is closed, empty object is returned
+  } 
 
   try {
     await page.waitForSelector('.nav_dropdown-block', { timeout: 60000 });
@@ -22,18 +22,18 @@ async function scrapeData() { //function that handles the data
     console.error('Error waiting selector .nav_dropdown-block:', error);
     await browser.close();
     return {};
-  } // if selector is not found wothin the timeout an error is displayed and empty object returned
+  } 
 
- // Get all elements containing the links
+ 
   const data = await page.evaluate(() => {
     const listItems = Array.from(document.querySelectorAll('[role="list"] [role="listitem"]')).map((item) => {
       const linkElement = item.querySelector('a');
       const link = linkElement ? linkElement.href : null;
       const text = item.textContent.trim();
       return { link, text };
-    }); // the elements containing the links are extracted and their URL and text are retrieved
+    }); 
 
-    // Find the index of "integrations" and filter the list 
+   
     const nextNavDropdownIndex = listItems.findIndex((item) => item.text === 'Integrations') + 1;
     const filteredListItems = nextNavDropdownIndex !== 0 ? listItems.slice(0, nextNavDropdownIndex) : listItems;
 
