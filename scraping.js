@@ -1,12 +1,12 @@
 const puppeteer = require('puppeteer');
-const fs = require('fs');
+const fs = require('fs'); //file manipulation
 
 const URL = 'https://reviewpro.shijigroup.com/team#contact';
 
-async function scrapeCustomerSupport() {
+async function scrapeCustomerSupport() { //handles scraping of customer support details
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.setDefaultNavigationTimeout(0); // Desactivar el tiempo de espera predeterminado
+  await page.setDefaultNavigationTimeout(0); // Disable the default timeout
 
   try {
     await page.goto(URL);
@@ -17,8 +17,9 @@ async function scrapeCustomerSupport() {
   }
 
   await page.waitForSelector('#w-node-ca11194c-6591-2629-47d7-20c091395d83-4481d0c6', { timeout: 60000 });
+  // if selector not found error displayed and empty object returned
 
-  const customerSupportDetails = await page.evaluate(() => {
+  const customerSupportDetails = await page.evaluate(() => { // parent div selected and text classes and email extracted
     const parentDiv = document.querySelector('#w-node-ca11194c-6591-2629-47d7-20c091395d83-4481d0c6');
 
     const details = {
@@ -30,11 +31,11 @@ async function scrapeCustomerSupport() {
 
     elements.forEach((element) => {
       if (element.classList.contains('text-size-regular')) {
-        details.textClasses.push(element.textContent.trim());
+        details.textClasses.push(element.textContent.trim()); // Extract and store text content
       }
 
       if (element.tagName.toLowerCase() === 'a' && element.getAttribute('href').startsWith('mailto:')) {
-        details.emailLinks.push(element.getAttribute('href').replace('mailto:', ''));
+        details.emailLinks.push(element.getAttribute('href').replace('mailto:', '')); // Extract and store email links
       }
     });
 
@@ -46,7 +47,7 @@ async function scrapeCustomerSupport() {
   return customerSupportDetails;
 }
 
-scrapeCustomerSupport().then((customerSupport) => {
+scrapeCustomerSupport().then((customerSupport) => { //data stored JSON format
   const jsonData = JSON.stringify(customerSupport, null, 2);
   fs.writeFile('customer_support.json', jsonData, (err) => {
     if (err) {
