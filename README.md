@@ -20,14 +20,14 @@ Make sure you have Node.js and npm installed on your machine.
 
 This repository includes the following files:
 
-- `scrapeCustomerSupport.js`: A script that demonstrates how to scrape customer support emails from a webpage. It uses Puppeteer and Cheerio to extract the data. The target webpage is [https://reviewpro.shijigroup.com/team#contact](https://reviewpro.shijigroup.com/team#contact).
+- `scraping.js`: A script that demonstrates how to scrape customer support emails from a webpage. It uses Puppeteer and Cheerio to extract the data. The target webpage is [https://reviewpro.shijigroup.com/team#contact](https://reviewpro.shijigroup.com/team#contact).
 - `scrapeProducts.js`: A script that demonstrates how to scrape product information from the webpage [https://reviewpro.shijigroup.com/](https://reviewpro.shijigroup.com/). It retrieves the list of products from the "Products" and "Essentials" sections.
 
 ## Usage
 
 ### Scrape Customer Support Emails
 
-The `scrapeCustomerSupport.js` script extracts customer support names and emails from the webpage [https://reviewpro.shijigroup.com/team#contact](https://reviewpro.shijigroup.com/team#contact).
+The `scraping.js` script extracts customer support names and emails from the webpage [https://reviewpro.shijigroup.com/team#contact](https://reviewpro.shijigroup.com/team#contact).
 
 To run the script, execute the following command: `node scraping.js`
 
