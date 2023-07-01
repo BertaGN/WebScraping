@@ -8,7 +8,7 @@ This repository contains code examples and information on web scraping using Pup
 
 To get started with web scraping using Puppeteer, follow these steps:
 
-1. Clone this repository: `git clone https://github.com/your-username/your-repo.git`
+1. Clone this repository: `git clone https://github.com/BertaGN/WebScraping.git`
 2. Install the dependencies: `npm install`
 3. Run the scraping scripts: 
    - For customer support emails: `node scraping.js`
