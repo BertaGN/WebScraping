@@ -17,9 +17,9 @@ async function scrapeData() {
   }
 
   try {
-    await page.waitForSelector('.nav_dropdown_wrapper', { timeout: 60000 });
+    await page.waitForSelector('.nav_dropdown-block', { timeout: 60000 });
   } catch (error) {
-    console.error('Error al esperar el selector .nav_dropdown_wrapper:', error);
+    console.error('Error al esperar el selector .nav_dropdown-block:', error);
     await browser.close();
     return {};
   }
@@ -32,7 +32,10 @@ async function scrapeData() {
       return { link, text };
     });
 
-    return { listItems };
+    const nextNavDropdownIndex = listItems.findIndex((item) => item.text === 'Integrations') + 1;
+    const filteredListItems = nextNavDropdownIndex !== 0 ? listItems.slice(0, nextNavDropdownIndex) : listItems;
+
+    return { listItems: filteredListItems };
   });
 
   await browser.close();
@@ -42,11 +45,11 @@ async function scrapeData() {
 
 scrapeData().then((data) => {
   const jsonData = JSON.stringify(data, null, 2);
-  fs.writeFile('data.json', jsonData, (err) => {
+  fs.writeFile('productsEssentials.json', jsonData, (err) => {
     if (err) {
       console.error('Error al guardar el archivo JSON:', err);
     } else {
-      console.log('Los datos se han guardado correctamente en data.json');
+      console.log('Los datos se han guardado correctamente en productsEssentials.json');
     }
   });
 });
