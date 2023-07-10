@@ -26,7 +26,7 @@ This repository includes the following files:
 ## Usage
 
 If you're having troubles with puppeteer you may run the follow script in the terminal: `npm update puppeteer`
-Go to develop branch to execute the scripts and see the code. 
+Go to master branch to execute the scripts and see the code. (git checkout master)
 
 ### Scrape Customer Support Emails
 
