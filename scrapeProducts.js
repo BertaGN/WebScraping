@@ -1,10 +1,11 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 
+
 const URL = 'https://reviewpro.shijigroup.com/';
 
 async function scrapeData() { 
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ headless: 'new' });
   const page = await browser.newPage();
   await page.setDefaultNavigationTimeout(0);
 
@@ -33,11 +34,16 @@ async function scrapeData() {
       return { link, text };
     }); 
 
-   
-    const nextNavDropdownIndex = listItems.findIndex((item) => item.text === 'Integrations') + 1;
-    const filteredListItems = nextNavDropdownIndex !== 0 ? listItems.slice(0, nextNavDropdownIndex) : listItems;
+    
+    const integrationsIndex = listItems.findIndex((item) => item.text === 'Integrations');
+    const filteredListItems = integrationsIndex !== -1 ? listItems.slice(0, integrationsIndex + 1) : listItems;
 
-    return { listItems: filteredListItems };
+    
+    const finalListItems = filteredListItems.filter((item) =>
+      !/\/education\//.test(item.link)
+    );
+
+    return { listItems: finalListItems };
   });
 
   await browser.close();

@@ -3,13 +3,8 @@ const fs = require('fs');
 
 const URL = 'https://reviewpro.shijigroup.com/team#contact';
 
-<<<<<<< HEAD:scrapeContact.js
 async function scrapeCustomerSupport() { 
-  const browser = await puppeteer.launch();
-=======
-async function scrapeCustomerSupport() { //handles scraping of customer support details
   const browser = await puppeteer.launch({ headless: 'new' });
->>>>>>> develop:scraping.js
   const page = await browser.newPage();
   await page.setDefaultNavigationTimeout(0); 
 
@@ -23,7 +18,6 @@ async function scrapeCustomerSupport() { //handles scraping of customer support 
 
   await page.waitForSelector('#w-node-ca11194c-6591-2629-47d7-20c091395d83-4481d0c6', { timeout: 60000 });
 
-
   const customerSupportDetails = await page.evaluate(() => { 
     const parentDiv = document.querySelector('#w-node-ca11194c-6591-2629-47d7-20c091395d83-4481d0c6');
 
@@ -36,7 +30,7 @@ async function scrapeCustomerSupport() { //handles scraping of customer support 
 
     elements.forEach((element) => {
       if (element.classList.contains('text-size-regular')) {
-        details.textClasses.push(element.textContent.trim()); 
+        details.textClasses.push(element.textContent.trim());
       }
 
       if (element.tagName.toLowerCase() === 'a' && element.getAttribute('href').startsWith('mailto:')) {
