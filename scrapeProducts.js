@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 
+
 const URL = 'https://reviewpro.shijigroup.com/';
 
 async function scrapeData() { //function that handles the data
@@ -34,10 +35,15 @@ async function scrapeData() { //function that handles the data
     }); // the elements containing the links are extracted and their URL and text are retrieved
 
     // Find the index of "integrations" and filter the list 
-    const nextNavDropdownIndex = listItems.findIndex((item) => item.text === 'Integrations') + 1;
-    const filteredListItems = nextNavDropdownIndex !== 0 ? listItems.slice(0, nextNavDropdownIndex) : listItems;
+    const integrationsIndex = listItems.findIndex((item) => item.text === 'Integrations');
+    const filteredListItems = integrationsIndex !== -1 ? listItems.slice(0, integrationsIndex + 1) : listItems;
 
-    return { listItems: filteredListItems };
+    // Exclude the unwanted links using a regular expression
+    const finalListItems = filteredListItems.filter((item) =>
+      !/\/education\//.test(item.link)
+    );
+
+    return { listItems: finalListItems };
   });
 
   await browser.close();
