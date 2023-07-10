@@ -25,6 +25,9 @@ This repository includes the following files:
 
 ## Usage
 
+If you're having troubles with puppeteer you may run the follow script in the terminal: `npm update puppeteer`
+Go to develop branch to execute the scripts and see the code. 
+
 ### Scrape Customer Support Emails
 
 The `scrapeContact.js` script extracts customer support names and emails from the webpage [https://reviewpro.shijigroup.com/team#contact](https://reviewpro.shijigroup.com/team#contact).
