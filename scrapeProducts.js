@@ -5,7 +5,7 @@ const fs = require('fs');
 const URL = 'https://reviewpro.shijigroup.com/';
 
 async function scrapeData() { //function that handles the data
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ headless: 'new' });
   const page = await browser.newPage();
   await page.setDefaultNavigationTimeout(0); // Disable the default timeout
 

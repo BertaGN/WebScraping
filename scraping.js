@@ -4,7 +4,7 @@ const fs = require('fs'); //file manipulation
 const URL = 'https://reviewpro.shijigroup.com/team#contact';
 
 async function scrapeCustomerSupport() { //handles scraping of customer support details
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ headless: 'new' });
   const page = await browser.newPage();
   await page.setDefaultNavigationTimeout(0); // Disable the default timeout
 
